@@ -1,9 +1,10 @@
 {
   "name": "literal-numbers",
   "title": "literal-numbers",
-  "version": "0.0.1",
+  "version": "1.0.2",
   "description": "literal-numbers",
   "author": "Pablo Novas <pjnovas@gmail.com>",
+  "main": "./literal-numbers.js",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.5",
