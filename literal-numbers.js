@@ -2,21 +2,21 @@
   // Set up literalNumbers for each environment. 
 
   //AMD.
-  if (typeof define === 'function' && define.amd) {
-    define(['exports'], function(exports) {
-      root.literalNumbers = factory(root, exports);
+  if (typeof define === "function" && define.amd) {
+    define(["exports"], function() {
+      root.literalNumbers = factory(root);
     });
 
   //Node.js or CommonJS.
-  } else if (typeof exports !== 'undefined') {
-    factory(root, exports);
+  } else if (typeof exports !== "undefined") {
+    module.exports = factory();
 
   //As global.
   } else {
-    root.literalNumbers = factory(root, {});
+    global.literalNumbers = factory();
   }
 
-}(this, function(root, literalNumbers) {
+}(this, function() {
   
   var units = [
       "cero"
@@ -236,21 +236,13 @@
     return left + right;
   };
 
-  var convertFromString = function(/*number, options*/){
-    throw new Error("Not yet implemented");
-  };
 
-  literalNumbers = function(number, options) {
-    if (number === undefined || number === null){
+  var literalNumbers = function(number, options) {
+    if (number === undefined || number === null) {
       return units[0];
     }
 
-    switch(root.toString.call(number)){
-      case "[object Number]": return convertFromNumber(number, options);
-      case "[object String]": return convertFromString(number, options);
-    }
-
-    throw new Error(number + ": unexpected type. Only Number or String are allowed.");
+    return convertFromNumber(number, options);
   };
 
   return literalNumbers;
